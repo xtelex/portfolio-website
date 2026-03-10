@@ -1,0 +1,485 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+@layer components {
+  .hero-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+    background-size: 4px 4px;
+    opacity: 0.02;
+    mix-blend-mode: overlay;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pill {
+    @apply inline-flex flex-none items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm text-white/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur transition hover:border-white/20 hover:bg-white/10 hover:text-white;
+  }
+
+  .pillIcon {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-full bg-black/30 text-orange-400 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_10px_30px_rgba(255,110,0,0.12)];
+  }
+
+  .techMarquee {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    padding-bottom: 4px;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  .techTrack {
+    --marquee-duration: 24s;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    width: max-content;
+    animation: tech-marquee var(--marquee-duration) linear infinite;
+    will-change: transform;
+  }
+
+  .techMarquee:hover .techTrack {
+    animation-play-state: paused;
+  }
+
+  .techPill {
+    --accent: #ff7a18;
+    @apply inline-flex flex-none items-center gap-3 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm text-white/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur transition;
+  }
+
+  .techGlyph {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-full bg-black/35 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(255,255,255,0.06)];
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 18px 50px color-mix(in srgb, var(--accent) 24%, transparent);
+    color: color-mix(in srgb, var(--accent) 80%, white 20%);
+  }
+
+  .techLabel {
+    @apply whitespace-nowrap;
+  }
+
+  .heroCopy {
+    width: 100%;
+    max-width: 56rem;
+  }
+
+  .revealSection {
+    opacity: 0;
+    transform: translateY(18px) scale(0.99);
+    filter: blur(2px);
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform, filter;
+  }
+
+  .revealSection.revealVisible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  .heroAuroraText {
+    position: relative;
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.92);
+    background-image:
+      radial-gradient(140% 160% at 10% 20%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.55) 32%, rgba(210, 225, 255, 0.35) 52%, rgba(255, 255, 255, 0.85) 72%, rgba(255, 255, 255, 0.65) 100%),
+      linear-gradient(115deg, rgba(255, 255, 255, 0.25) 0%, rgba(180, 205, 255, 0.55) 24%, rgba(255, 255, 255, 0.92) 50%, rgba(210, 225, 255, 0.40) 72%, rgba(255, 255, 255, 0.35) 100%);
+    background-size: 220% 220%;
+    background-position: 0% 40%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow:
+      0 0 0.5px rgba(255, 255, 255, 0.35),
+      0 14px 60px rgba(255, 255, 255, 0.06);
+    filter: drop-shadow(0 18px 60px rgba(255, 255, 255, 0.05));
+    animation: aurora-silver 6.5s ease-in-out infinite;
+  }
+
+  .heroAuroraText::after {
+    content: "";
+    position: absolute;
+    inset: -0.08em -0.14em;
+    background:
+      radial-gradient(50% 70% at 30% 40%, rgba(255, 255, 255, 0.20), transparent 60%),
+      radial-gradient(60% 70% at 70% 60%, rgba(190, 215, 255, 0.14), transparent 62%);
+    filter: blur(14px);
+    opacity: 0.55;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    z-index: -1;
+  }
+
+  .serviceCard {
+    --accent: #ff7a18;
+    --delay: 0ms;
+    @apply relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] transition;
+    opacity: 0;
+    transform: translateY(16px) scale(0.99);
+    filter: blur(2px);
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--delay);
+  }
+
+  .serviceCard::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(600px 260px at 40% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 55%);
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  .serviceCard:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  .revealSection.revealVisible .serviceCard {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  .serviceThumb {
+    position: relative;
+    height: 148px;
+    border-radius: 18px;
+    overflow: hidden;
+    background:
+      radial-gradient(420px 240px at 25% 30%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 60%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.02));
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+      0 26px 80px rgba(0, 0, 0, 0.45);
+  }
+
+  .serviceThumb::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+    background-size: 4px 4px;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+  }
+
+  .serviceThumbImg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.05) contrast(1.02) brightness(0.82);
+    opacity: 0.88;
+    transform: scale(1.03);
+  }
+
+  .serviceThumb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(480px 220px at 20% 30%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
+      linear-gradient(135deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.10));
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .serviceIcon {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 46px;
+    width: 46px;
+    border-radius: 16px;
+    color: color-mix(in srgb, var(--accent) 75%, white 25%);
+    background: rgba(0, 0, 0, 0.35);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.10) inset,
+      0 18px 55px color-mix(in srgb, var(--accent) 22%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 2;
+  }
+
+  @keyframes aurora-silver {
+    0% {
+      background-position: 0% 45%;
+      filter: drop-shadow(0 18px 60px rgba(255, 255, 255, 0.04));
+    }
+    50% {
+      background-position: 100% 55%;
+      filter: drop-shadow(0 22px 70px rgba(190, 215, 255, 0.08));
+    }
+    100% {
+      background-position: 0% 45%;
+      filter: drop-shadow(0 18px 60px rgba(255, 255, 255, 0.04));
+    }
+  }
+
+  @media (min-width: 768px) {
+    .heroCopy {
+      max-width: min(56rem, calc(100% - 360px));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .heroCopy {
+      max-width: min(56rem, calc(100% - 440px));
+    }
+  }
+
+  .typingCaret {
+    display: inline-block;
+    width: 1ch;
+    margin-left: 2px;
+    color: rgba(255, 255, 255, 0.75);
+    animation: caret-blink 1s steps(1, end) infinite;
+  }
+
+  @keyframes caret-blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes tech-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .techMarquee {
+      overflow-x: auto;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
+    .techTrack {
+      animation: none;
+      padding-inline: 8px;
+    }
+
+    .typingCaret {
+      animation: none;
+    }
+
+    .heroAuroraText {
+      animation: none;
+      background-position: 15% 50%;
+    }
+
+    .revealSection {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition: none;
+    }
+
+    .serviceCard {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      animation: none;
+    }
+  }
+
+  .heroAvatarWrap {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .heroHelloWrap {
+    position: absolute;
+    right: 44%;
+    top: 92px;
+    transform: translateX(0);
+    z-index: 2;
+  }
+
+  .heroHello {
+    position: relative;
+    max-width: 320px;
+    padding: 16px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(10, 10, 12, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 14px;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+      0 26px 70px rgba(0, 0, 0, 0.55);
+    transform-origin: 85% 100%;
+    animation:
+      hero-pop 680ms cubic-bezier(0.22, 1, 0.36, 1) both,
+      hero-float 5.5s ease-in-out 900ms infinite;
+  }
+
+  .heroHello::after {
+    content: "";
+    position: absolute;
+    right: 20px;
+    bottom: -10px;
+    width: 16px;
+    height: 16px;
+    background: rgba(10, 10, 12, 0.55);
+    border-right: 1px solid rgba(255, 255, 255, 0.14);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    transform: rotate(45deg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .heroHello::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 20px;
+    pointer-events: none;
+    background: radial-gradient(260px 120px at 20% 0%, rgba(255, 120, 20, 0.18), transparent 60%);
+    mix-blend-mode: screen;
+    opacity: 0.85;
+  }
+
+  @keyframes hero-pop {
+    0% {
+      opacity: 0;
+      transform: translateY(14px) scale(0.92);
+      filter: blur(2px);
+    }
+    65% {
+      opacity: 1;
+      transform: translateY(0) scale(1.02);
+      filter: blur(0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes hero-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .heroHelloWrap {
+      right: auto;
+      left: 50%;
+      top: -8px;
+      transform: translate(-50%, -100%);
+    }
+    .heroHello {
+      max-width: 280px;
+      text-align: center;
+    }
+    .heroHello::after {
+      right: 50%;
+      transform: translateX(50%) rotate(45deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .heroHello {
+      animation: none;
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+
+  .heroAvatarWrap::before {
+    content: "";
+    position: absolute;
+    inset: -18%;
+    z-index: -1;
+    border-radius: 9999px;
+    background:
+      radial-gradient(closest-side, rgba(255, 120, 20, 0.32), transparent 72%),
+      radial-gradient(closest-side, rgba(255, 180, 80, 0.18), transparent 78%);
+    filter: blur(46px);
+    opacity: 0.85;
+  }
+
+  .heroAvatar {
+    width: 100%;
+    height: auto;
+    -webkit-mask-image: radial-gradient(circle at 50% 38%, #000 64%, transparent 92%);
+    mask-image: radial-gradient(circle at 50% 38%, #000 64%, transparent 92%);
+    filter:
+      drop-shadow(0 22px 70px rgba(0, 0, 0, 0.65))
+      drop-shadow(0 18px 55px rgba(255, 120, 20, 0.18));
+  }
+
+  .heroPortrait {
+    background: transparent;
+    -webkit-mask-image: linear-gradient(to bottom, #000 88%, transparent);
+    mask-image: linear-gradient(to bottom, #000 88%, transparent);
+    filter: drop-shadow(0 22px 70px rgba(0, 0, 0, 0.65));
+  }
+
+  .ctaButton {
+    @apply rounded-2xl bg-white px-9 py-4 text-sm font-medium text-black ring-1 ring-white/10 transition;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.28),
+      0 20px 70px rgba(255, 120, 20, 0.45);
+  }
+  .ctaButton:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.38),
+      0 26px 82px rgba(255, 120, 20, 0.6);
+  }
+}
