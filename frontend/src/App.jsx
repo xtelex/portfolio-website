@@ -4,6 +4,7 @@ import fullStackThumb from "../assets/images/fullstackthumb.jpg";
 import uiThumb from "../assets/images/uithumb.png";
 import manageThumb from "../assets/images/managethum.png";
 import appointmentThumb from "../assets/images/appoinment.png";
+import chatAppThumb from "../assets/images/image.png";
 
 const DISPLAY_NAME = "Christian Paul";
 const HERO_TITLE = "Hi, I'm Christian Paul";
@@ -96,11 +97,12 @@ const projects = [
     thumb: appointmentThumb
   },
   {
-    title: "Project",
-    description: "Add a short project description here.",
-    tags: ["UI/UX", "Frontend"],
-    liveHref: "#",
-    codeHref: "#"
+    title: "CHAT APP",
+    description: "A real-time chat application with modern UI and live messaging features.",
+    tags: ["React", "Node.js", "Socket.io", "MongoDB"],
+    liveHref: "https://chat-app-gamma-cyan-21.vercel.app/",
+    codeHref: "#",
+    thumb: chatAppThumb
   },
   {
     title: "Project",
