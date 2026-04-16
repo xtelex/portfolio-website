@@ -255,18 +255,19 @@ export default function App() {
       const emailjs = await import("@emailjs/browser");
       await emailjs.send(
         "service_rgg65ol",    // EmailJS Service ID
-        "template_rue5mg",   // EmailJS Template ID
+        "template_mfjffxt",   // EmailJS Template ID
         {
           from_name: contactForm.name,
           from_email: contactForm.email,
           message: contactForm.message,
         },
-        "Z2tYjCCUsvmZVC2gtmGqw"     // EmailJS Public Key
+        "upxXU9cdk9-sByBoD"     // EmailJS Public Key
       );
       setContactSent(true);
       setTimeout(() => { closeContact(); setTimeout(() => { setContactSent(false); setContactForm({ name: "", email: "", message: "" }); }, 400); }, 2200);
     } catch (err) {
-      alert("Failed to send message. Please try again.");
+      console.error("EmailJS error:", err);
+      alert("Failed to send message: " + (err?.text || err?.message || JSON.stringify(err)));
     }
   };
 
