@@ -1,0 +1,11 @@
+Model Information:
+* title:	Laptop of the Mad Genius
+* source:	https://sketchfab.com/3d-models/laptop-of-the-mad-genius-47a5e7f175ce4ef984aed0efafa824d9
+* author:	holykadylo (https://sketchfab.com/holykadylo)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Laptop of the Mad Genius" (https://sketchfab.com/3d-models/laptop-of-the-mad-genius-47a5e7f175ce4ef984aed0efafa824d9) by holykadylo (https://sketchfab.com/holykadylo) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
