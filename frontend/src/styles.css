@@ -1123,3 +1123,152 @@ html {
     font-size: clamp(2rem, 12vw, 3rem);
   }
 }
+
+/* Work Section - Simple Big Text */
+.work-section-simple {
+  position: relative;
+  background: black;
+}
+
+.work-hero-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  padding: 4rem 2rem;
+}
+
+.work-hero-text {
+  font-size: clamp(6rem, 20vw, 16rem);
+  font-weight: 900;
+  color: #ffffff;
+  text-align: center;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Beating animation keyframes */
+@keyframes beat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.05);
+  }
+}
+
+.work-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 2.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: black;
+  background: white;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+  animation: beat 1.5s ease-in-out infinite;
+}
+
+.work-cta-button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+  animation: none;
+}
+
+.work-cta-button svg {
+  transition: transform 0.3s ease;
+}
+
+.work-cta-button:hover svg {
+  transform: translateY(3px);
+}
+
+.work-projects-list {
+  position: relative;
+  background: black;
+}
+
+@media (max-width: 768px) {
+  .work-hero-text {
+    font-size: clamp(4rem, 15vw, 10rem);
+  }
+  
+  .work-cta-button {
+    padding: 1rem 2rem;
+    font-size: 0.75rem;
+  }
+}
+
+
+/* Projects Page Overlay */
+.projects-page-overlay {
+  animation: projectsPageFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+}
+
+@keyframes projectsPageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Project Card Focus Effect */
+.projects-grid-container {
+  transition: filter 0.3s ease;
+}
+
+.projects-grid-container:has(.project-card:hover) .project-card:not(:hover) {
+  filter: blur(4px);
+  opacity: 0.6;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.project-card {
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  filter: blur(0px) !important;
+  opacity: 1 !important;
+}
+
+/* Footer Grid Text */
+.footer-text-grid {
+  font-size: clamp(8rem, 25vw, 20rem);
+  font-weight: 900;
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.1);
+  text-stroke: 2px rgba(255, 255, 255, 0.1);
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-align: center;
+  letter-spacing: -0.02em;
+}

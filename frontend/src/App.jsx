@@ -177,21 +177,24 @@ const projects = [
     description: "Hospital appointment booking web app built with the MERN stack.",
     tags: ["MongoDB", "Express", "React", "Node.js"],
     liveHref: "https://hospitalproj.vercel.app",
-    codeHref: "#"
+    codeHref: "#",
+    thumbnail: "/assets/images/appoinment.png"
   },
   {
     title: "CHAT APP",
     description: "A real-time chat application with modern UI and live messaging features.",
     tags: ["React", "Node.js", "Socket.io", "MongoDB"],
     liveHref: "https://chat-app-gamma-cyan-21.vercel.app/",
-    codeHref: "#"
+    codeHref: "#",
+    thumbnail: "/assets/images/CHATAPP.png"
   },
   {
     title: "Project",
     description: "Add a short project description here.",
     tags: ["Landing Page", "Responsive"],
     liveHref: "#",
-    codeHref: "#"
+    codeHref: "#",
+    thumbnail: null
   }
 ];
 
@@ -218,7 +221,9 @@ export default function App() {
   const [contactSent, setContactSent] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuClosing, setMenuClosing] = useState(false);
+  const [showProjectsPage, setShowProjectsPage] = useState(false);
   const modalRef = useRef(null);
+  const lenisRef = useRef(null);
 
   const closeContact = () => {
     setContactClosing(true);
@@ -252,6 +257,8 @@ export default function App() {
       touchMultiplier: 2,
       infinite: false,
     });
+
+    lenisRef.current = lenis;
 
     function raf(time) {
       lenis.raf(time);
@@ -434,6 +441,25 @@ export default function App() {
       document.body.style.overflow = "";
     };
   }, [contactOpen]);
+
+  useEffect(() => {
+    if (!showProjectsPage) return;
+    const onKey = (e) => { if (e.key === "Escape") setShowProjectsPage(false); };
+    document.addEventListener("keydown", onKey);
+    
+    // Stop Lenis when projects page is open
+    if (lenisRef.current) {
+      lenisRef.current.stop();
+    }
+    
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      // Restart Lenis when projects page closes
+      if (lenisRef.current) {
+        lenisRef.current.start();
+      }
+    };
+  }, [showProjectsPage]);
 
   const handleContactSubmit = async (e) => {
     e.preventDefault();
@@ -793,191 +819,97 @@ export default function App() {
         </div>
       </section>
 
-      <section id="work" className="mx-auto max-w-6xl px-6 py-20">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-          className="mx-auto flex max-w-2xl flex-col items-center text-center"
-        >
-          <motion.h2 variants={fadeIn} className="text-2xl font-semibold tracking-tight">Work</motion.h2>
-          <motion.p variants={fadeIn} className="mt-2 text-sm text-white/50">Selected projects</motion.p>
-        </motion.div>
-
-        <div className="mt-10 space-y-px">
-          {projects.map((project, index) => (
-            <motion.article
-              key={`${project.title}-${index}`}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={fadeInUp}
-              className="group border-t border-white/10 bg-black py-12 px-8 transition hover:bg-white/5"
-            >
-              <div className="grid gap-6 md:grid-cols-12 md:gap-8">
-                <div className="md:col-span-8">
-                  <h3 className="text-xl font-semibold tracking-tight text-white">{project.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-white/60">{project.description}</p>
-
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-white/20 px-3 py-1 text-xs text-white/70"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex items-center md:col-span-4 md:justify-end">
-                  <div className="flex gap-4">
-                    {isRealHref(project.liveHref) ? (
-                      <a
-                        className="inline-flex items-center gap-2 border border-white bg-white px-6 py-3 text-sm font-medium uppercase tracking-wider text-black transition hover:bg-white/90"
-                        href={project.liveHref}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        View Live
-                        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                          <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                        </svg>
-                      </a>
-                    ) : null}
-                    {isRealHref(project.codeHref) ? (
-                      <a
-                        className="inline-flex items-center gap-2 border border-white/20 px-6 py-3 text-sm font-medium uppercase tracking-wider text-white transition hover:bg-white/5"
-                        href={project.codeHref}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Code
-                      </a>
-                    ) : null}
-                  </div>
-                </div>
-              </div>
-            </motion.article>
-          ))}
+      {/* Work Section - Simple Big Text with Button */}
+      <section id="work" className="work-section-simple">
+        <div className="work-hero-container">
+          <h2 className="work-hero-text">WORK</h2>
+          <button 
+            onClick={() => {
+              setShowProjectsPage(true);
+            }}
+            className="work-cta-button"
+          >
+            CLICK HERE TO SEE
+            <svg viewBox="0 0 24 24" className="h-5 w-5 ml-2" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+          </button>
         </div>
       </section>
 
-      <section id="about" className="mx-auto max-w-6xl px-6 pb-20">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInUp}
-          className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
-        >
-          <h2 className="text-2xl font-semibold tracking-tight">About</h2>
-          <p className="mt-1 text-sm text-white/50">Full-Stack Developer based in Sariaya, Quezon.</p>
-          <div className="mt-4">
-            <p className="text-sm leading-7 text-white/70">
-                Hello! I'm Christian. I am a Full-Stack Developer based in Sariaya Quezon, specializing in the MERN stack. I have a deep-rooted fascination with creating interactive, high-performance web applications that feature modern UI/UX aesthetics—think sleek animations and polished glassmorphism. With a background in IT, I've spent my time building everything from personal branding tools to complex management systems. My goal is always the same: to create digital experiences that are as functional as they are beautiful. When I'm not at my desk, you can usually find me refining my latest project on GitHub.
-              </p>
+      {/* Footer */}
+      <footer className="relative border-t border-white/10 bg-black">
+        <div className="w-full px-6 py-12">
+          {/* Footer Content */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 max-w-7xl mx-auto">
+            {/* Left Side - Contact */}
+            <div>
+              <h3 className="text-2xl font-semibold text-white mb-4">Contact</h3>
+              <p className="text-sm text-white/60 mb-6">Feel free to reach out or connect with me.</p>
+              
+              <div className="flex gap-4">
+                <a
+                  href="mailto:ianmanievo6@gmail.com"
+                  className="flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:bg-white/10 hover:text-white"
+                  aria-label="Email"
+                >
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="M2 7l10 7 10-7" />
+                  </svg>
+                </a>
+                <a
+                  href="https://github.com/xtelex"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:bg-white/10 hover:text-white"
+                  aria-label="GitHub"
+                >
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+                    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                  </svg>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/manievo-christian-paul-e-53724a3a8/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center w-12 h-12 rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:bg-white/10 hover:text-white"
+                  aria-label="LinkedIn"
+                >
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
 
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={staggerContainer}
-                className="mt-6 flex flex-wrap gap-4"
-              >
-                {/* MongoDB */}
-                <motion.div variants={scaleIn} className="flex items-center gap-2 rounded-xl border border-white/10 bg-black/20 px-4 py-2">
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="#47A248" aria-hidden="true">
-                    <path d="M17.193 9.555c-1.264-5.58-4.252-7.414-4.573-8.115-.28-.394-.53-.954-.735-1.44-.036.495-.055.685-.523 1.184-.723.566-4.438 3.682-4.74 10.02-.282 5.912 4.27 9.435 4.888 9.884l.07.05A73.49 73.49 0 0 1 11.91 24h.481c.114-1.032.284-2.056.51-3.07.417-.296.604-.463.85-.693a11.342 11.342 0 0 0 3.639-8.464c.01-.814-.103-1.662-.197-2.218z"/>
-                  </svg>
-                  <span className="text-xs text-white/80">MongoDB</span>
-                </motion.div>
-                {/* Express */}
-                <motion.div variants={scaleIn} className="flex items-center gap-2 rounded-xl border border-white/10 bg-black/20 px-4 py-2">
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="#ffffff" aria-hidden="true">
-                    <path d="M24 18.588a1.529 1.529 0 0 1-1.895-.72l-3.45-4.771-.5-.667-4.003 5.444a1.466 1.466 0 0 1-1.802.708l5.158-6.92-4.798-6.251a1.595 1.595 0 0 1 1.9.666l3.576 4.83 3.596-4.81a1.435 1.435 0 0 1 1.788-.668L21.708 7.9l-2.522 3.283a.666.666 0 0 0 0 .994l4.804 6.412zM.002 11.576l.42-2.075c1.154-4.103 5.858-5.81 9.094-3.27 1.895 1.489 2.368 3.597 2.275 5.973H1.116C.943 16.447 4.005 19.009 7.92 17.7a4.078 4.078 0 0 0 2.582-2.876c.207-.666.548-.78 1.174-.588a5.417 5.417 0 0 1-2.589 3.957 6.272 6.272 0 0 1-7.306-.933 6.575 6.575 0 0 1-1.64-3.858c-.013-.447-.013-.894-.013-1.341-.013-.394-.013-.827.013-1.485zm1.186-.185h9.08c-.075-3.273-2.06-5.424-4.36-5.229-2.678.257-4.54 2.43-4.72 5.229z"/>
-                  </svg>
-                  <span className="text-xs text-white/80">Express</span>
-                </motion.div>
-                {/* React */}
-                <motion.div variants={scaleIn} className="flex items-center gap-2 rounded-xl border border-white/10 bg-black/20 px-4 py-2">
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="#61DAFB" aria-hidden="true">
-                    <path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.278-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.374-.792 1.683-3.263.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38a2.167 2.167 0 0 0-1.096-.278zm-.005 1.09c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44a23.476 23.476 0 0 0-3.107-.534A23.892 23.892 0 0 0 12 9.504a23.485 23.485 0 0 0-2.347-1.543c.06-.29.117-.569.181-.835.358-1.49.75-2.4 1.2-2.812.37-.34.787-.51 1.247-.51zm-10.692.01c.225 0 .406.044.558.127.666.382.955 1.835.73 3.704-.054.46-.142.945-.25 1.44a23.476 23.476 0 0 0-3.107-.534A23.892 23.892 0 0 0 2.16 9.504a23.485 23.485 0 0 0-2.347-1.543c.06-.29.117-.569.181-.835.358-1.49.75-2.4 1.2-2.812.37-.34.787-.51 1.247-.51zM12 10.39c.74 0 1.466.035 2.163.1.703.065 1.39.17 2.05.31a22.09 22.09 0 0 1 1.227 2.205 22.09 22.09 0 0 1-1.227 2.205 22.09 22.09 0 0 1-2.05.31A22.09 22.09 0 0 1 12 15.62a22.09 22.09 0 0 1-2.163-.1 22.09 22.09 0 0 1-2.05-.31 22.09 22.09 0 0 1-1.227-2.205 22.09 22.09 0 0 1 1.227-2.205 22.09 22.09 0 0 1 2.05-.31A22.09 22.09 0 0 1 12 10.39zm-5.428 4.176a22.09 22.09 0 0 0 1.227 2.205 22.09 22.09 0 0 0-2.05.31 22.09 22.09 0 0 0-2.163.1 22.09 22.09 0 0 0-1.227-2.205 22.09 22.09 0 0 0 1.227-2.205 22.09 22.09 0 0 0 2.163-.1 22.09 22.09 0 0 0 2.05-.31 22.09 22.09 0 0 0-1.227 2.205zm10.856 0a22.09 22.09 0 0 0-1.227-2.205 22.09 22.09 0 0 0 2.05-.31 22.09 22.09 0 0 0 2.163-.1 22.09 22.09 0 0 0 1.227 2.205 22.09 22.09 0 0 0-1.227 2.205 22.09 22.09 0 0 0-2.163.1 22.09 22.09 0 0 0-2.05.31 22.09 22.09 0 0 0 1.227-2.205z"/>
-                  </svg>
-                  <span className="text-xs text-white/80">React</span>
-                </motion.div>
-                {/* Node.js */}
-                <motion.div variants={scaleIn} className="flex items-center gap-2 rounded-xl border border-white/10 bg-black/20 px-4 py-2">
-                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="#339933" aria-hidden="true">
-                    <path d="M11.998 24c-.321 0-.641-.084-.922-.247l-2.936-1.737c-.438-.245-.224-.332-.08-.383.585-.203.703-.25 1.328-.605.065-.037.151-.023.218.017l2.256 1.339c.082.045.198.045.275 0l8.795-5.076c.082-.047.134-.141.134-.238V6.921c0-.099-.053-.19-.137-.24l-8.791-5.072c-.081-.047-.189-.047-.271 0L3.075 6.68c-.084.05-.139.142-.139.241v10.15c0 .097.055.189.137.236l2.409 1.392c1.307.654 2.108-.116 2.108-.891V7.787c0-.142.114-.253.256-.253h1.115c.139 0 .255.111.255.253v10.021c0 1.745-.95 2.745-2.604 2.745-.508 0-.909 0-2.026-.551L2.28 18.675a1.85 1.85 0 0 1-.919-1.604V6.921c0-.663.353-1.278.919-1.608l8.795-5.082a1.864 1.864 0 0 1 1.847 0l8.794 5.082c.566.33.92.945.92 1.608v10.15c0 .662-.354 1.275-.92 1.604l-8.794 5.076c-.281.163-.6.247-.924.247zm2.718-6.993c-3.852 0-4.657-1.769-4.657-3.252 0-.142.114-.253.256-.253h1.136c.127 0 .233.092.252.217.172 1.161.684 1.747 3.013 1.747 1.854 0 2.643-.42 2.643-1.405 0-.567-.225-.988-3.107-1.271-2.41-.238-3.9-.77-3.9-2.696 0-1.777 1.497-2.835 4.007-2.835 2.819 0 4.214.978 4.391 3.079a.255.255 0 0 1-.065.196.254.254 0 0 1-.189.083h-1.14a.253.253 0 0 1-.248-.206c-.274-1.217-.94-1.608-2.749-1.608-2.024 0-2.26.705-2.26 1.233 0 .641.278.827 3.011 1.189 2.706.358 3.996.866 3.996 2.763 0 1.917-1.598 3.019-4.39 3.019z"/>
-                  </svg>
-                  <span className="text-xs text-white/80">Node.js</span>
-                </motion.div>
-              </motion.div>
+            {/* Right Side - Links */}
+            <div className="flex justify-end">
+              <div>
+                <h4 className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-4">Links</h4>
+                <ul className="space-y-2">
+                  <li><a href="https://github.com/xtelex" target="_blank" rel="noreferrer" className="text-sm text-white/60 hover:text-white transition">GITHUB</a></li>
+                  <li><a href="https://x.com" target="_blank" rel="noreferrer" className="text-sm text-white/60 hover:text-white transition">X</a></li>
+                  <li><a href="https://www.linkedin.com/in/manievo-christian-paul-e-53724a3a8/" target="_blank" rel="noreferrer" className="text-sm text-white/60 hover:text-white transition">LINKEDIN</a></li>
+                  <li><a href="#" className="text-sm text-white/60 hover:text-white transition">CODEPEN</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
-        </motion.div>
-      </section>
 
-      <section id="contact" className="mx-auto max-w-6xl px-6 pb-24">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInUp}
-          className="rounded-2xl border border-white/10 bg-white/5 p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
-        >
-          <h2 className="text-2xl font-semibold tracking-tight">Contact</h2>
-          <p className="mt-3 text-sm leading-6 text-white/65">Feel free to reach out or connect with me.</p>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="mt-6 flex flex-wrap gap-4"
-          >
-            {/* Email */}
-            <motion.a
-              variants={scaleIn}
-              href="mailto:ianmanievo6@gmail.com"
-              className="flex items-center justify-center rounded-2xl border border-white/10 bg-black/20 p-4 text-white/70 transition hover:bg-black/35 hover:text-white"
-              aria-label="Email"
-            >
-              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <rect x="2" y="4" width="20" height="16" rx="2" />
-                <path d="M2 7l10 7 10-7" />
-              </svg>
-            </motion.a>
-            {/* GitHub */}
-            <motion.a
-              variants={scaleIn}
-              href="https://github.com/xtelex"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center justify-center rounded-2xl border border-white/10 bg-black/20 p-4 text-white/70 transition hover:bg-black/35 hover:text-white"
-              aria-label="GitHub"
-            >
-              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden="true">
-                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
-              </svg>
-            </motion.a>
-            {/* LinkedIn */}
-            <motion.a
-              variants={scaleIn}
-              href="https://www.linkedin.com/in/manievo-christian-paul-e-53724a3a8/"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center justify-center rounded-2xl border border-white/10 bg-black/20 p-4 text-white/70 transition hover:bg-black/35 hover:text-white"
-              aria-label="LinkedIn"
-            >
-              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden="true">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-            </motion.a>
-          </motion.div>
-        </motion.div>
-      </section>
+          {/* Large Footer Text - Full Width */}
+          <div className="relative overflow-hidden py-8 w-full">
+            <div className="footer-text-grid">
+              FOOTER
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-white/10 max-w-7xl mx-auto">
+            <p className="text-xs text-white/40">© 2015 - 2026 Christian Paul E. Manievo</p>
+          </div>
+        </div>
+      </footer>
       </div>
 
       {/* Full-Screen Menu Overlay */}
@@ -1179,6 +1111,178 @@ export default function App() {
                 </button>
               </form>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Projects Page Overlay */}
+      {showProjectsPage && (
+        <div 
+          className="fixed inset-0 z-[100] bg-white projects-page-overlay" 
+          style={{ 
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            WebkitOverflowScrolling: 'touch'
+          }}
+          onWheel={(e) => e.stopPropagation()}
+        >
+          <div className="min-h-screen">
+            {/* Top Right Buttons */}
+            <div className="fixed top-8 right-8 z-10 flex items-center gap-4">
+              {/* Let's Talk Button */}
+              <button
+                onClick={() => {
+                  setShowProjectsPage(false);
+                  setTimeout(() => setContactOpen(true), 300);
+                }}
+                className="px-6 py-3 bg-black text-white text-sm font-medium rounded-full hover:bg-black/80 transition"
+              >
+                LET'S TALK
+              </button>
+              
+              {/* Close Button */}
+              <button
+                onClick={() => setShowProjectsPage(false)}
+                className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white hover:bg-black/80 transition"
+                aria-label="Close"
+              >
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Main Content with Sidebar */}
+            <div className="flex min-h-screen">
+              {/* Left Sidebar */}
+              <div className="w-64 flex-shrink-0 p-8 pt-24 sticky top-0 h-screen flex flex-col justify-between">
+                <div className="space-y-6">
+                  {/* Bio Text */}
+                  <div>
+                    <p className="text-sm leading-relaxed text-black/80">
+                      I'm obsessed with creating digital magic that's as addictive as your favorite TV show. Mobile apps, web design? Consider me your personal genie ✨
+                    </p>
+                  </div>
+
+                  {/* Categories */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-black/60">Web Design</span>
+                      <span className="text-black/40">(10)</span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-black/60">Webflow Development</span>
+                      <span className="text-black/40">(10)</span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-black/60">Mobile App Design</span>
+                      <span className="text-black/40">(4)</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* CTA at Bottom */}
+                <div className="pb-8">
+                  <p className="text-xs text-black/60 mb-2">Ready to transform?</p>
+                  <p className="text-xs text-black/60 mb-4">I offer free proposals and unlimited enthusiasm.</p>
+                  <button className="px-6 py-2 bg-black text-white text-xs rounded-full hover:bg-black/80 transition">
+                    Let's talk!
+                  </button>
+                </div>
+              </div>
+
+              {/* Right Content Area */}
+              <div className="flex-1 p-8 pt-24 pb-20">
+                {/* Header */}
+                <div className="mb-16">
+                  <h1 className="text-6xl md:text-8xl font-bold text-black mb-4">MY WORK</h1>
+                  <p className="text-lg text-black/60">Selected projects showcasing my skills and creativity</p>
+                </div>
+
+                {/* Projects Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 projects-grid-container">
+                {projects.map((project, index) => (
+                  <motion.article
+                    key={`${project.title}-${index}`}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className="group bg-black/5 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 project-card hover:scale-105 hover:z-10 relative"
+                  >
+                    {/* Project Image */}
+                    <div className="aspect-video bg-gradient-to-br from-black/10 to-black/5 relative overflow-hidden">
+                      {project.thumbnail ? (
+                        <>
+                          <img 
+                            src={project.thumbnail} 
+                            alt={project.title}
+                            className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+                        </>
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-6xl font-bold text-black/10 group-hover:text-black/20 transition">{index + 1}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Project Info */}
+                    <div className="p-6">
+                      <h3 className="text-2xl font-bold text-black mb-3 group-hover:text-[#adff2f] transition">
+                        {project.title}
+                      </h3>
+                      <p className="text-black/60 mb-4 leading-relaxed">
+                        {project.description}
+                      </p>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-3 py-1 text-xs font-medium bg-black/10 text-black rounded-full"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Links */}
+                      <div className="flex gap-4">
+                        {isRealHref(project.liveHref) && (
+                          <a
+                            href={project.liveHref}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 text-sm font-semibold text-black hover:text-[#adff2f] transition"
+                          >
+                            View Live
+                            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                            </svg>
+                          </a>
+                        )}
+                        {isRealHref(project.codeHref) && (
+                          <a
+                            href={project.codeHref}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 text-sm font-semibold text-black hover:text-[#adff2f] transition"
+                          >
+                            View Code
+                            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </motion.article>
+                ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
