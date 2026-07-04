@@ -585,15 +585,15 @@ export default function App() {
           variants={staggerContainer}
           className="relative z-10 grid grid-cols-1 gap-px bg-white/10 md:grid-cols-3"
         >
-          <motion.div variants={fadeIn} className="bg-black p-8">
+          <motion.div variants={fadeIn} className="bg-black p-8 min-h-[140px] flex flex-col justify-center">
             <h3 className="mb-2 text-sm font-medium uppercase tracking-wider text-white">Full stack</h3>
-            <p className="text-sm text-white/50">Design code under one roof. No handoffs, no loose ends.</p>
+            <p className="text-sm text-white/50 leading-relaxed">Design code under one roof. No handoffs, no loose ends.</p>
           </motion.div>
-          <motion.div variants={fadeIn} className="bg-black p-8">
+          <motion.div variants={fadeIn} className="bg-black p-8 min-h-[140px] flex flex-col justify-center">
             <h3 className="mb-2 text-sm font-medium uppercase tracking-wider text-white">Built to scale</h3>
-            <p className="text-sm text-white/50">Interfaces that reduce decision fatigue and increase adoption.</p>
+            <p className="text-sm text-white/50 leading-relaxed">Interfaces that reduce decision fatigue and increase adoption.</p>
           </motion.div>
-          <motion.div variants={fadeIn} className="bg-black p-8 flex items-center justify-center">
+          <motion.div variants={fadeIn} className="bg-black p-8 min-h-[140px] flex items-center justify-center">
             <a href="#contact" className="w-full border border-white bg-white px-8 py-4 text-center text-sm font-medium uppercase tracking-wider text-black transition hover:bg-white/90">
               Start a Project
             </a>
@@ -780,7 +780,7 @@ export default function App() {
                     </svg>
                   </div>
 
-                  <h3 className="text-lg md:text-xl font-semibold tracking-tight text-white mb-2">
+                  <h3 className="text-base md:text-lg font-semibold tracking-tight text-white mb-2 leading-snug">
                     {service.title}
                   </h3>
                   <p className="text-xs md:text-sm leading-relaxed text-white/60 mb-4 line-clamp-2">
