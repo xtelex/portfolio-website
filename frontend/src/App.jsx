@@ -222,6 +222,7 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuClosing, setMenuClosing] = useState(false);
   const [showProjectsPage, setShowProjectsPage] = useState(false);
+  const [lightMode, setLightMode] = useState(false);
   const modalRef = useRef(null);
   const lenisRef = useRef(null);
 
@@ -485,7 +486,9 @@ export default function App() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-white antialiased relative">
+    <main className={`min-h-screen antialiased relative transition-colors duration-300 ${
+      lightMode ? 'bg-white text-black' : 'bg-black text-white'
+    }`}>
       {/* Grid Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
@@ -493,26 +496,72 @@ export default function App() {
       </div>
 
       <div className="relative z-10">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/30 backdrop-blur">
+      <header className={`fixed inset-x-0 top-0 z-50 border-b backdrop-blur transition-colors duration-300 ${
+        lightMode 
+          ? 'border-black/10 bg-white/80' 
+          : 'border-white/10 bg-black/30'
+      }`}>
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-            <a href="#top" className="text-sm font-semibold tracking-tight text-white/90">
+            <a href="#top" className={`text-sm font-semibold tracking-tight transition-colors ${
+              lightMode ? 'text-black/90' : 'text-white/90'
+            }`}>
               {DISPLAY_NAME}
             </a>
-            <button 
-              className="text-xs font-medium tracking-widest text-white/70 uppercase hover:text-white transition"
-              onClick={openMenu}
-            >
-              MENU
-            </button>
-            <button onClick={() => setContactOpen(true)} className="text-sm text-white/80 hover:text-white transition">
-              Get in Touch
-            </button>
+            
+            <div className="flex items-center gap-4">
+              {/* Light/Dark Mode Toggle */}
+              <button
+                onClick={() => setLightMode(!lightMode)}
+                className={`p-2 rounded-full transition-all ${
+                  lightMode 
+                    ? 'bg-black/10 hover:bg-black/20 text-black' 
+                    : 'bg-white/10 hover:bg-white/20 text-white'
+                }`}
+                aria-label="Toggle light/dark mode"
+              >
+                {lightMode ? (
+                  // Moon icon for dark mode
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                  </svg>
+                ) : (
+                  // Sun icon for light mode
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                  </svg>
+                )}
+              </button>
+              
+              <button 
+                className={`text-xs font-medium tracking-widest uppercase transition-colors ${
+                  lightMode ? 'text-black/70 hover:text-black' : 'text-white/70 hover:text-white'
+                }`}
+                onClick={openMenu}
+              >
+                MENU
+              </button>
+              <button onClick={() => setContactOpen(true)} className={`text-sm transition-colors ${
+                lightMode ? 'text-black/80 hover:text-black' : 'text-white/80 hover:text-white'
+              }`}>
+                Get in Touch
+              </button>
+            </div>
           </div>
       </header>
 
       <section
         id="top"
-        className="hero-frame relative flex min-h-screen w-full flex-col justify-between overflow-hidden bg-black pb-0"
+        className={`hero-frame relative flex min-h-screen w-full flex-col justify-between overflow-hidden pb-0 transition-colors duration-300 ${
+          lightMode ? 'bg-white' : 'bg-black'
+        }`}
       >
         {/* Hero Content */}
         <div className="relative z-10 flex-1 grid grid-cols-1 lg:grid-cols-[1fr,auto] gap-12 items-center px-8 md:px-12 pt-24">
@@ -524,15 +573,23 @@ export default function App() {
             className="max-w-5xl"
           >
             {/* Badge */}
-            <motion.div variants={fadeIn} className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2">
-              <span className="text-xs uppercase tracking-wider text-white/70">Open</span>
-              <span className="text-xs text-white/50">For new opportunities</span>
+            <motion.div variants={fadeIn} className={`mb-8 inline-flex items-center gap-2 rounded-full border px-4 py-2 ${
+              lightMode ? 'border-black/20' : 'border-white/20'
+            }`}>
+              <span className={`text-xs uppercase tracking-wider ${
+                lightMode ? 'text-black/70' : 'text-white/70'
+              }`}>Open</span>
+              <span className={`text-xs ${
+                lightMode ? 'text-black/50' : 'text-white/50'
+              }`}>For new opportunities</span>
             </motion.div>
 
             {/* Main Heading */}
             <motion.h1 
               variants={fadeInUp}
-              className="text-5xl font-bold leading-tight text-white sm:text-6xl md:text-7xl lg:text-8xl aurora-text"
+              className={`text-5xl font-bold leading-tight sm:text-6xl md:text-7xl lg:text-8xl ${
+                lightMode ? 'text-black' : 'aurora-text'
+              }`}
             >
               Full-stack developer who builds,
               <br />
@@ -540,7 +597,9 @@ export default function App() {
             </motion.h1>
 
             {/* Description */}
-            <motion.div variants={fadeInUp} className="mt-12 max-w-md space-y-6 text-white/60">
+            <motion.div variants={fadeInUp} className={`mt-12 max-w-md space-y-6 ${
+              lightMode ? 'text-black/60' : 'text-white/60'
+            }`}>
               <p className="text-base leading-relaxed">
                 Full-stack developer specializing in the MERN stack with a passion for creating interactive, high-performance web applications. Focused on clean code, modern design, and seamless execution.
               </p>
@@ -584,18 +643,38 @@ export default function App() {
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
-          className="relative z-10 grid grid-cols-1 gap-px bg-white/10 md:grid-cols-3"
+          className={`relative z-10 grid grid-cols-1 gap-px md:grid-cols-3 ${
+            lightMode ? 'bg-black/10' : 'bg-white/10'
+          }`}
         >
-          <motion.div variants={fadeIn} className="bg-black p-8 min-h-[140px] flex flex-col justify-center">
-            <h3 className="mb-2 text-sm font-medium uppercase tracking-wider text-white">Full stack</h3>
-            <p className="text-sm text-white/50 leading-relaxed">Design code under one roof. No handoffs, no loose ends.</p>
+          <motion.div variants={fadeIn} className={`min-h-[140px] flex flex-col justify-center p-8 transition-colors duration-300 ${
+            lightMode ? 'bg-white' : 'bg-black'
+          }`}>
+            <h3 className={`mb-2 text-sm font-medium uppercase tracking-wider ${
+              lightMode ? 'text-black' : 'text-white'
+            }`}>Full stack</h3>
+            <p className={`text-sm leading-relaxed ${
+              lightMode ? 'text-black/50' : 'text-white/50'
+            }`}>Design code under one roof. No handoffs, no loose ends.</p>
           </motion.div>
-          <motion.div variants={fadeIn} className="bg-black p-8 min-h-[140px] flex flex-col justify-center">
-            <h3 className="mb-2 text-sm font-medium uppercase tracking-wider text-white">Built to scale</h3>
-            <p className="text-sm text-white/50 leading-relaxed">Interfaces that reduce decision fatigue and increase adoption.</p>
+          <motion.div variants={fadeIn} className={`min-h-[140px] flex flex-col justify-center p-8 transition-colors duration-300 ${
+            lightMode ? 'bg-white' : 'bg-black'
+          }`}>
+            <h3 className={`mb-2 text-sm font-medium uppercase tracking-wider ${
+              lightMode ? 'text-black' : 'text-white'
+            }`}>Built to scale</h3>
+            <p className={`text-sm leading-relaxed ${
+              lightMode ? 'text-black/50' : 'text-white/50'
+            }`}>Interfaces that reduce decision fatigue and increase adoption.</p>
           </motion.div>
-          <motion.div variants={fadeIn} className="bg-black p-8 min-h-[140px] flex items-center justify-center">
-            <a href="#contact" className="w-full border border-white bg-white px-8 py-4 text-center text-sm font-medium uppercase tracking-wider text-black transition hover:bg-white/90">
+          <motion.div variants={fadeIn} className={`min-h-[140px] flex items-center justify-center p-8 transition-colors duration-300 ${
+            lightMode ? 'bg-white' : 'bg-black'
+          }`}>
+            <a href="#contact" className={`w-full border px-8 py-4 text-center text-sm font-medium uppercase tracking-wider transition ${
+              lightMode 
+                ? 'border-black bg-black text-white hover:bg-black/90' 
+                : 'border-white bg-white text-black hover:bg-white/90'
+            }`}>
               Start a Project
             </a>
           </motion.div>
@@ -603,7 +682,9 @@ export default function App() {
       </section>
 
       {/* Scroll-Triggered Marquee Section */}
-      <section className="relative overflow-hidden py-20 bg-black">
+      <section className={`relative overflow-hidden py-20 transition-colors duration-300 ${
+        lightMode ? 'bg-white' : 'bg-black'
+      }`}>
         {/* First Row - Moves Left on Scroll */}
         <div className="marquee-scroll-container mb-8">
           <div className="marquee-scroll-left">
@@ -632,7 +713,9 @@ export default function App() {
       </section>
 
       {/* About & Tech Stack Section */}
-      <section className="relative min-h-screen flex items-center py-32 px-8 md:px-16 bg-black">
+      <section className={`relative min-h-screen flex items-center py-32 px-8 md:px-16 transition-colors duration-300 ${
+        lightMode ? 'bg-white' : 'bg-black'
+      }`}>
         <div className="mx-auto w-full max-w-[1600px]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             {/* Left Side - About */}
@@ -750,7 +833,9 @@ export default function App() {
       </section>
 
       {/* Horizontal Scroll Services Section */}
-      <section id="services" className="horizontal-services-section bg-black">
+      <section id="services" className={`horizontal-services-section transition-colors duration-300 ${
+        lightMode ? 'bg-white' : 'bg-black'
+      }`}>
         <div className="horizontal-services-wrapper">
           {/* Title at Top */}
           <div className="services-title-top">
@@ -821,14 +906,20 @@ export default function App() {
       </section>
 
       {/* Work Section - Simple Big Text with Button */}
-      <section id="work" className="work-section-simple bg-black">
+      <section id="work" className={`work-section-simple transition-colors duration-300 ${
+        lightMode ? 'bg-white' : 'bg-black'
+      }`}>
         <div className="work-hero-container">
-          <h2 className="work-hero-text text-white">WORK</h2>
+          <h2 className={`work-hero-text ${lightMode ? 'text-black' : 'text-white'}`}>WORK</h2>
           <button 
             onClick={() => {
               setShowProjectsPage(true);
             }}
-            className="work-cta-button bg-white text-black hover:bg-white/90"
+            className={`work-cta-button ${
+              lightMode 
+                ? 'bg-black text-white hover:bg-black/90' 
+                : 'bg-white text-black hover:bg-white/90'
+            }`}
           >
             CLICK HERE TO SEE
             <svg viewBox="0 0 24 24" className="h-5 w-5 ml-2" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -839,7 +930,9 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="relative border-t border-white/10 bg-black">
+      <footer className={`relative border-t transition-colors duration-300 ${
+        lightMode ? 'border-black/10 bg-white' : 'border-white/10 bg-black'
+      }`}>
         <div className="w-full px-6 py-12">
           {/* Footer Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 max-w-7xl mx-auto">
