@@ -596,16 +596,16 @@ html {
 .horizontal-services-section {
   position: relative;
   overflow: visible;
-  padding-bottom: 8rem;
+  padding-bottom: 12rem;
 }
 
 .horizontal-services-wrapper {
   position: relative;
-  min-height: 100vh;
+  min-height: 120vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 4rem 4rem 2rem 4rem;
+  padding: 4rem 4rem 4rem 4rem;
   gap: 2rem;
 }
 
