@@ -511,7 +511,7 @@ export default function App() {
 
       <section
         id="top"
-        className="hero-frame relative flex min-h-[100svh] w-full flex-col justify-between overflow-hidden bg-black"
+        className="hero-frame relative flex min-h-screen w-full flex-col justify-between overflow-hidden bg-black pb-0"
       >
         {/* Hero Content */}
         <div className="relative z-10 flex-1 grid grid-cols-1 lg:grid-cols-[1fr,auto] gap-12 items-center px-8 md:px-12 pt-24">
