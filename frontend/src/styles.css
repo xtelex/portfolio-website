@@ -595,7 +595,6 @@ html {
 /* Horizontal Scroll Services Section */
 .horizontal-services-section {
   position: relative;
-  background: black;
   overflow: visible;
   padding-bottom: 8rem;
 }
@@ -1127,7 +1126,6 @@ html {
 /* Work Section - Simple Big Text */
 .work-section-simple {
   position: relative;
-  background: black;
 }
 
 .work-hero-container {
@@ -1176,9 +1174,6 @@ html {
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: black;
-  background: white;
-  border: 1px solid white;
   border-radius: 0.5rem;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: pointer;
@@ -1187,7 +1182,7 @@ html {
 
 .work-cta-button:hover {
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   animation: none;
 }
 
@@ -1271,4 +1266,69 @@ html {
   -webkit-background-clip: text;
   text-align: center;
   letter-spacing: -0.02em;
+}
+
+/* Topographic Background - TEST VERSION */
+.topographic-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1) 0px,
+    rgba(255, 255, 255, 0.1) 2px,
+    transparent 2px,
+    transparent 20px
+  );
+  z-index: 1;
+}
+
+@keyframes topoMove {
+  0% {
+    background-position: 0 0, 0 0, 0 0, 0 0;
+  }
+  100% {
+    background-position: 400px 400px, -500px -500px, 600px 600px, 0 0;
+  }
+}
+
+/* Aurora Text Effect - Silver */
+.aurora-text {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #e0e0e0 15%,
+    #c0c0c0 30%,
+    #a8a8a8 45%,
+    #d0d0d0 60%,
+    #e8e8e8 75%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: aurora-flow 8s ease-in-out infinite, aurora-glow 4s ease-in-out infinite;
+}
+
+@keyframes aurora-flow {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
+
+/* Subtle silver glow animation */
+@keyframes aurora-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
+  }
+  50% {
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 50px rgba(192, 192, 192, 0.2));
+  }
 }

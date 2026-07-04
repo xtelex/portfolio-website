@@ -531,7 +531,7 @@ export default function App() {
             {/* Main Heading */}
             <motion.h1 
               variants={fadeInUp}
-              className="text-5xl font-bold leading-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
+              className="text-5xl font-bold leading-tight text-white sm:text-6xl md:text-7xl lg:text-8xl aurora-text"
             >
               Full-stack developer who builds,
               <br />
@@ -602,7 +602,7 @@ export default function App() {
       </section>
 
       {/* Scroll-Triggered Marquee Section */}
-      <section className="relative overflow-hidden bg-black py-20">
+      <section className="relative overflow-hidden py-20 bg-black">
         {/* First Row - Moves Left on Scroll */}
         <div className="marquee-scroll-container mb-8">
           <div className="marquee-scroll-left">
@@ -631,7 +631,7 @@ export default function App() {
       </section>
 
       {/* About & Tech Stack Section */}
-      <section className="relative bg-black min-h-screen flex items-center py-32 px-8 md:px-16">
+      <section className="relative min-h-screen flex items-center py-32 px-8 md:px-16 bg-black">
         <div className="mx-auto w-full max-w-[1600px]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             {/* Left Side - About */}
@@ -749,7 +749,7 @@ export default function App() {
       </section>
 
       {/* Horizontal Scroll Services Section */}
-      <section id="services" className="horizontal-services-section">
+      <section id="services" className="horizontal-services-section bg-black">
         <div className="horizontal-services-wrapper">
           {/* Title at Top */}
           <div className="services-title-top">
@@ -820,14 +820,14 @@ export default function App() {
       </section>
 
       {/* Work Section - Simple Big Text with Button */}
-      <section id="work" className="work-section-simple">
+      <section id="work" className="work-section-simple bg-black">
         <div className="work-hero-container">
-          <h2 className="work-hero-text">WORK</h2>
+          <h2 className="work-hero-text text-white">WORK</h2>
           <button 
             onClick={() => {
               setShowProjectsPage(true);
             }}
-            className="work-cta-button"
+            className="work-cta-button bg-white text-black hover:bg-white/90"
           >
             CLICK HERE TO SEE
             <svg viewBox="0 0 24 24" className="h-5 w-5 ml-2" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
