@@ -595,18 +595,22 @@ html {
 /* Horizontal Scroll Services Section */
 .horizontal-services-section {
   position: relative;
-  overflow: visible;
+  overflow: visible !important;
   padding-bottom: 12rem;
+  height: auto !important;
+  min-height: 100vh !important;
 }
 
 .horizontal-services-wrapper {
   position: relative;
-  min-height: 120vh;
+  min-height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding: 4rem 4rem 4rem 4rem;
   gap: 2rem;
+  overflow: visible;
 }
 
 .services-title-top {

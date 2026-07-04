@@ -325,6 +325,7 @@ export default function App() {
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          pinSpacing: true,
         }
       });
 
