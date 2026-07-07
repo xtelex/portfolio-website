@@ -1175,89 +1175,83 @@ export default function App() {
       {/* Projects Page Overlay */}
       {showProjectsPage && (
         <div 
-          className="fixed inset-0 z-[100] bg-white projects-page-overlay" 
-          style={{ 
-            overflowY: 'auto',
-            overflowX: 'hidden',
-            WebkitOverflowScrolling: 'touch'
-          }}
-          onWheel={(e) => e.stopPropagation()}
+          className="fixed inset-0 z-[100] bg-white projects-page-overlay"
         >
-          <div className="min-h-screen">
-            {/* Top Right Buttons */}
-            <div className="fixed top-8 right-8 z-10 flex items-center gap-4">
-              {/* Let's Talk Button */}
-              <button
-                onClick={() => {
-                  setShowProjectsPage(false);
-                  setTimeout(() => setContactOpen(true), 300);
-                }}
-                className="px-6 py-3 bg-black text-white text-sm font-medium rounded-full hover:bg-black/80 transition"
-              >
-                LET'S TALK
-              </button>
-              
-              {/* Close Button */}
-              <button
-                onClick={() => setShowProjectsPage(false)}
-                className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white hover:bg-black/80 transition"
-                aria-label="Close"
-              >
-                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                  <path d="M18 6L6 18M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
+          {/* Top Right Buttons - Fixed */}
+          <div className="fixed top-8 right-8 z-20 flex items-center gap-4">
+            {/* Let's Talk Button */}
+            <button
+              onClick={() => {
+                setShowProjectsPage(false);
+                setTimeout(() => setContactOpen(true), 300);
+              }}
+              className="px-6 py-3 bg-black text-white text-sm font-medium rounded-full hover:bg-black/80 transition"
+            >
+              LET'S TALK
+            </button>
+            
+            {/* Close Button */}
+            <button
+              onClick={() => setShowProjectsPage(false)}
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white hover:bg-black/80 transition"
+              aria-label="Close"
+            >
+              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
 
-            {/* Main Content with Sidebar */}
-            <div className="flex min-h-screen">
-              {/* Left Sidebar */}
-              <div className="w-64 flex-shrink-0 p-8 pt-24 sticky top-0 h-screen flex flex-col justify-between">
-                <div className="space-y-6">
-                  {/* Bio Text */}
-                  <div>
-                    <p className="text-sm leading-relaxed text-black/80">
-                      I'm obsessed with creating digital magic that's as addictive as your favorite TV show. Mobile apps, web design? Consider me your personal genie ✨
-                    </p>
-                  </div>
-
-                  {/* Categories */}
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-black/60">Web Design</span>
-                      <span className="text-black/40">(10)</span>
-                    </div>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-black/60">Webflow Development</span>
-                      <span className="text-black/40">(10)</span>
-                    </div>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-black/60">Mobile App Design</span>
-                      <span className="text-black/40">(4)</span>
-                    </div>
-                  </div>
+          {/* Main Content with Sidebar */}
+          <div className="flex h-screen">
+            {/* Left Sidebar - Fixed */}
+            <div className="w-64 flex-shrink-0 p-8 pt-24 flex flex-col justify-between border-r border-black/10">
+              <div className="space-y-6">
+                {/* Bio Text */}
+                <div>
+                  <p className="text-sm leading-relaxed text-black/80">
+                    I'm obsessed with creating digital magic that's as addictive as your favorite TV show. Mobile apps, web design? Consider me your personal genie ✨
+                  </p>
                 </div>
 
-                {/* CTA at Bottom */}
-                <div className="pb-8">
-                  <p className="text-xs text-black/60 mb-2">Ready to transform?</p>
-                  <p className="text-xs text-black/60 mb-4">I offer free proposals and unlimited enthusiasm.</p>
-                  <button className="px-6 py-2 bg-black text-white text-xs rounded-full hover:bg-black/80 transition">
-                    Let's talk!
-                  </button>
+                {/* Categories */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-black/60">Web Design</span>
+                    <span className="text-black/40">(10)</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-black/60">Webflow Development</span>
+                    <span className="text-black/40">(10)</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-black/60">Mobile App Design</span>
+                    <span className="text-black/40">(4)</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Right Content Area */}
-              <div className="flex-1 p-8 pt-24 pb-20">
-                {/* Header */}
-                <div className="mb-16">
-                  <h1 className="text-6xl md:text-8xl font-bold text-black mb-4">MY WORK</h1>
-                  <p className="text-lg text-black/60">Selected projects showcasing my skills and creativity</p>
-                </div>
+              {/* CTA at Bottom */}
+              <div className="pb-8">
+                <p className="text-xs text-black/60 mb-2">Ready to transform?</p>
+                <p className="text-xs text-black/60 mb-4">I offer free proposals and unlimited enthusiasm.</p>
+                <button className="px-6 py-2 bg-black text-white text-xs rounded-full hover:bg-black/80 transition">
+                  Let's talk!
+                </button>
+              </div>
+            </div>
 
-                {/* Projects Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 projects-grid-container">
+            {/* Right Content Area - Scrollable */}
+            <div className="flex-1 flex flex-col h-screen">
+              {/* Fixed Header */}
+              <div className="flex-shrink-0 p-8 pt-24 pb-8 bg-white border-b border-black/10">
+                <h1 className="text-6xl md:text-8xl font-bold text-black mb-4">MY WORK</h1>
+                <p className="text-lg text-black/60">Selected projects showcasing my skills and creativity</p>
+              </div>
+
+              {/* Scrollable Projects Grid */}
+              <div className="flex-1 overflow-y-auto p-8" style={{ WebkitOverflowScrolling: 'touch' }}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 projects-grid-container pb-20">
                 {projects.map((project, index) => (
                   <motion.article
                     key={`${project.title}-${index}`}
