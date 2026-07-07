@@ -1243,7 +1243,7 @@ export default function App() {
             </div>
 
             {/* Right Content Area - Scrollable */}
-            <div className="flex-1 flex flex-col h-screen overflow-hidden">
+            <div className="flex-1 flex flex-col overflow-hidden" style={{ height: '100vh' }}>
               {/* Fixed Header - Aligned with top buttons at exact same level */}
               <div className="flex-shrink-0 px-8 pt-8 pb-4 bg-white">
                 <div className="flex items-start justify-between">
@@ -1256,13 +1256,11 @@ export default function App() {
 
               {/* Scrollable Projects Grid */}
               <div 
-                className="flex-1 p-8 scrollable-projects-area" 
+                className="flex-1 p-8 overflow-y-auto overflow-x-hidden scrollable-projects-area" 
                 style={{ 
-                  overflowY: 'auto',
-                  overflowX: 'hidden',
                   WebkitOverflowScrolling: 'touch',
-                  height: 'calc(100vh - 280px)',
-                  pointerEvents: 'auto'
+                  position: 'relative',
+                  flex: '1 1 auto'
                 }}
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 projects-grid-container pb-20">

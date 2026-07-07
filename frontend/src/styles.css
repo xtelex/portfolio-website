@@ -1275,8 +1275,10 @@ html {
   overflow-y: auto !important;
   overflow-x: hidden !important;
   overscroll-behavior: contain;
-  pointer-events: auto !important;
   cursor: default;
+  /* Ensure it takes full height */
+  min-height: 0;
+  flex: 1 1 auto;
 }
 
 .scrollable-projects-area::-webkit-scrollbar {
