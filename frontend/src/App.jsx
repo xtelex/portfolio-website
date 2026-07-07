@@ -1244,7 +1244,15 @@ export default function App() {
             </div>
 
             {/* Right Content Area - Scrollable */}
-            <div className="flex-1 overflow-y-auto overflow-x-hidden">
+            <div 
+              className="flex-1 overflow-y-scroll overflow-x-hidden projects-scrollable-panel"
+              style={{
+                height: '100vh',
+                overflowY: 'scroll',
+                WebkitOverflowScrolling: 'touch',
+                position: 'relative'
+              }}
+            >
               {/* Fixed Header - Aligned with top buttons at exact same level */}
               <div className="sticky top-0 z-10 px-8 pt-8 pb-4 bg-white">
                 <div className="flex items-start justify-between">

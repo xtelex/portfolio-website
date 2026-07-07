@@ -1270,6 +1270,29 @@ html {
   -webkit-overflow-scrolling: touch;
 }
 
+/* Projects Scrollable Panel */
+.projects-scrollable-panel {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
+}
+
+.projects-scrollable-panel::-webkit-scrollbar {
+  width: 10px;
+}
+
+.projects-scrollable-panel::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.projects-scrollable-panel::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.projects-scrollable-panel::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
 @keyframes projectsPageFadeIn {
   from {
     opacity: 0;
