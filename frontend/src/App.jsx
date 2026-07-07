@@ -222,8 +222,16 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuClosing, setMenuClosing] = useState(false);
   const [showProjectsPage, setShowProjectsPage] = useState(false);
+  const [aboutVisible, setAboutVisible] = useState(false);
+  const [typedText1, setTypedText1] = useState("");
+  const [typedText2, setTypedText2] = useState("");
+  const [typedText3, setTypedText3] = useState("");
   const modalRef = useRef(null);
   const lenisRef = useRef(null);
+
+  const aboutText1 = "Hi, I'm Christian Paul E. Manievo, a BSIT student at CSTC Sariaya and currently interning at Socia. I specialize in the MERN stack (MongoDB, Express, React, Node.js) and love building full-stack web applications from concept to deployment.";
+  const aboutText2 = "My passion lies in creating interactive, high-performance web applications with modern UI/UX design. I focus on clean code, scalable architecture, and seamless user experiences that make a real impact.";
+  const aboutText3 = "Whether it's building RESTful APIs, crafting responsive interfaces, or implementing complex features, I'm always excited to turn ideas into functional, beautiful applications.";
 
   const closeContact = () => {
     setContactClosing(true);
@@ -430,6 +438,45 @@ export default function App() {
     revealTargets.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, []);
+
+  // Typing effect for About section
+  useEffect(() => {
+    if (!aboutVisible) return;
+
+    let currentIndex1 = 0;
+    let currentIndex2 = 0;
+    let currentIndex3 = 0;
+
+    const typeText1 = () => {
+      if (currentIndex1 < aboutText1.length) {
+        setTypedText1(aboutText1.slice(0, currentIndex1 + 1));
+        currentIndex1++;
+        setTimeout(typeText1, 20);
+      } else {
+        setTimeout(typeText2, 100);
+      }
+    };
+
+    const typeText2 = () => {
+      if (currentIndex2 < aboutText2.length) {
+        setTypedText2(aboutText2.slice(0, currentIndex2 + 1));
+        currentIndex2++;
+        setTimeout(typeText2, 20);
+      } else {
+        setTimeout(typeText3, 100);
+      }
+    };
+
+    const typeText3 = () => {
+      if (currentIndex3 < aboutText3.length) {
+        setTypedText3(aboutText3.slice(0, currentIndex3 + 1));
+        currentIndex3++;
+        setTimeout(typeText3, 20);
+      }
+    };
+
+    typeText1();
+  }, [aboutVisible, aboutText1, aboutText2, aboutText3]);
 
   useEffect(() => {
     if (!contactOpen) return;
@@ -642,6 +689,7 @@ export default function App() {
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeInUp}
+              onViewportEnter={() => setAboutVisible(true)}
             >
               <div className="mb-8">
                 <span className="text-sm uppercase tracking-widest text-white/50">ABOUT</span>
@@ -652,14 +700,21 @@ export default function App() {
               
               <div className="space-y-8 text-white/70 text-base md:text-lg leading-relaxed">
                 <p>
-                  Hi, I'm Christian Paul E. Manievo, a BSIT student at CSTC Sariaya and currently interning at Socia. I specialize in the MERN stack (MongoDB, Express, React, Node.js) and love building full-stack web applications from concept to deployment.
+                  {typedText1}
+                  {typedText1.length < aboutText1.length && <span className="animate-pulse">|</span>}
                 </p>
-                <p>
-                  My passion lies in creating interactive, high-performance web applications with modern UI/UX design. I focus on clean code, scalable architecture, and seamless user experiences that make a real impact.
-                </p>
-                <p>
-                  Whether it's building RESTful APIs, crafting responsive interfaces, or implementing complex features, I'm always excited to turn ideas into functional, beautiful applications.
-                </p>
+                {typedText1.length === aboutText1.length && (
+                  <p>
+                    {typedText2}
+                    {typedText2.length < aboutText2.length && <span className="animate-pulse">|</span>}
+                  </p>
+                )}
+                {typedText2.length === aboutText2.length && (
+                  <p>
+                    {typedText3}
+                    {typedText3.length < aboutText3.length && <span className="animate-pulse">|</span>}
+                  </p>
+                )}
               </div>
             </motion.div>
 
