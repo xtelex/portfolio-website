@@ -194,7 +194,7 @@ const projects = [
     tags: ["React", "E-Commerce", "Responsive", "UI/UX"],
     liveHref: "https://coffee-shop-website-client-pe39bnty8-xtelexs-projects.vercel.app/",
     codeHref: "#",
-    thumbnail: "/assets/images/uithumb.png"
+    thumbnail: "/assets/images/shoeskopo.png"
   }
 ];
 
