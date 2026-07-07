@@ -629,7 +629,7 @@ html {
 .service-card-horizontal {
   flex-shrink: 0;
   width: 600px;
-  max-height: 85vh;
+  max-height: 80vh;
   height: auto;
   padding: 0;
   background: rgba(255, 255, 255, 0.03);
@@ -643,7 +643,7 @@ html {
 .service-thumbnail {
   position: relative;
   width: 100%;
-  height: 240px;
+  height: 200px;
   overflow: hidden;
   border-radius: 24px 24px 0 0;
 }
@@ -667,7 +667,7 @@ html {
 }
 
 .service-content-wrapper {
-  padding: 2rem 2.5rem 2rem 2.5rem;
+  padding: 1.5rem 2rem 1.5rem 2rem;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -675,18 +675,23 @@ html {
 }
 
 .service-content-wrapper h3 {
-  line-height: 1.5;
+  line-height: 1.4;
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
   max-width: 100%;
   hyphens: auto;
+  font-size: 1rem;
+}
+
+.service-content-wrapper p {
+  font-size: 0.875rem;
 }
 
 .service-project-name {
   margin-top: auto;
   padding-top: 1.5rem;
-  padding-bottom: 2rem;
+  padding-bottom: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -698,6 +703,7 @@ html {
   overflow-wrap: break-word;
   white-space: normal;
   hyphens: auto;
+  font-size: 1.5rem;
 }
 
 .view-all-card {
