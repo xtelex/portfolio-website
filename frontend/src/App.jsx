@@ -247,12 +247,12 @@ export default function App() {
     if (typeof window === "undefined") return;
 
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.8,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1,
+      wheelMultiplier: 0.8,
       smoothTouch: false,
       touchMultiplier: 2,
       infinite: false,
@@ -288,7 +288,7 @@ export default function App() {
           trigger: marqueeLeft,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 1,
+          scrub: 2,
         }
       });
     }
@@ -301,7 +301,7 @@ export default function App() {
           trigger: marqueeRight,
           start: 'top bottom',
           end: 'bottom top',
-          scrub: 1,
+          scrub: 2,
         }
       });
     }
@@ -321,7 +321,7 @@ export default function App() {
           trigger: servicesSection,
           start: 'top top',
           end: () => `+=${scrollWidth + window.innerHeight}`,
-          scrub: 1,
+          scrub: 2,
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
