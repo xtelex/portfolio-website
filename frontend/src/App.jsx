@@ -1177,6 +1177,7 @@ export default function App() {
       {showProjectsPage && (
         <div 
           className="fixed inset-0 z-[100] bg-white projects-page-overlay"
+          style={{ overflow: 'hidden' }}
         >
           {/* Top Right Buttons - Fixed */}
           <div className="fixed top-8 right-8 z-20 flex items-center gap-4">
@@ -1204,9 +1205,9 @@ export default function App() {
           </div>
 
           {/* Main Content with Sidebar */}
-          <div className="flex h-screen">
+          <div className="flex h-full">
             {/* Left Sidebar - Fixed */}
-            <div className="w-64 flex-shrink-0 p-8 pt-24 flex flex-col justify-between border-r border-black/10">
+            <div className="w-64 flex-shrink-0 p-8 pt-24 flex flex-col justify-between border-r border-black/10 overflow-y-auto">
               <div className="space-y-6">
                 {/* Bio Text */}
                 <div>
@@ -1243,9 +1244,9 @@ export default function App() {
             </div>
 
             {/* Right Content Area - Scrollable */}
-            <div className="flex-1 flex flex-col overflow-hidden" style={{ height: '100vh' }}>
+            <div className="flex-1 overflow-y-auto overflow-x-hidden">
               {/* Fixed Header - Aligned with top buttons at exact same level */}
-              <div className="flex-shrink-0 px-8 pt-8 pb-4 bg-white">
+              <div className="sticky top-0 z-10 px-8 pt-8 pb-4 bg-white">
                 <div className="flex items-start justify-between">
                   <div>
                     <h1 className="text-6xl md:text-8xl font-bold text-black leading-none mb-2">MY WORK</h1>
@@ -1255,14 +1256,7 @@ export default function App() {
               </div>
 
               {/* Scrollable Projects Grid */}
-              <div 
-                className="flex-1 p-8 overflow-y-auto overflow-x-hidden scrollable-projects-area" 
-                style={{ 
-                  WebkitOverflowScrolling: 'touch',
-                  position: 'relative',
-                  flex: '1 1 auto'
-                }}
-              >
+              <div className="p-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 projects-grid-container pb-20">
                 {projects.map((project, index) => (
                   <motion.article
