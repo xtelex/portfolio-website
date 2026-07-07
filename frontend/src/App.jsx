@@ -525,7 +525,7 @@ export default function App() {
             className="max-w-5xl"
           >
             {/* Badge */}
-            <motion.div variants={fadeIn} className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2">
+            <motion.div variants={fadeIn} className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2">
               <span className="text-xs uppercase tracking-wider text-white/70">Open</span>
               <span className="text-xs text-white/50">For new opportunities</span>
             </motion.div>
@@ -533,7 +533,7 @@ export default function App() {
             {/* Main Heading */}
             <motion.h1 
               variants={fadeInUp}
-              className="text-5xl font-bold leading-tight text-white sm:text-6xl md:text-7xl lg:text-8xl aurora-text"
+              className="text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl aurora-text"
             >
               Full-stack developer who builds,
               <br />
@@ -541,7 +541,7 @@ export default function App() {
             </motion.h1>
 
             {/* Description */}
-            <motion.div variants={fadeInUp} className="mt-12 max-w-md space-y-6 text-white/60">
+            <motion.div variants={fadeInUp} className="mt-8 max-w-md space-y-4 text-white/60">
               <p className="text-base leading-relaxed">
                 Full-stack developer specializing in the MERN stack with a passion for creating interactive, high-performance web applications. Focused on clean code, modern design, and seamless execution.
               </p>
