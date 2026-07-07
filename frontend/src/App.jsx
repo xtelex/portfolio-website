@@ -1182,11 +1182,10 @@ export default function App() {
       {/* Projects Page Overlay */}
       {showProjectsPage && (
         <div 
-          className="fixed inset-0 z-[100] bg-white projects-page-overlay"
-          style={{ overflow: 'hidden' }}
+          className="fixed inset-0 z-[100] bg-white"
         >
           {/* Top Right Buttons - Fixed */}
-          <div className="fixed top-8 right-8 z-20 flex items-center gap-4">
+          <div className="fixed top-8 right-8 z-[200] flex items-center gap-4">
             {/* Let's Talk Button */}
             <button
               onClick={() => {
@@ -1210,68 +1209,61 @@ export default function App() {
             </button>
           </div>
 
-          {/* Main Content with Sidebar */}
-          <div className="flex h-full">
-            {/* Left Sidebar - Fixed */}
-            <div className="w-64 flex-shrink-0 p-8 pt-24 flex flex-col justify-between border-r border-black/10 overflow-y-auto">
-              <div className="space-y-6">
-                {/* Bio Text */}
-                <div>
-                  <p className="text-sm leading-relaxed text-black/80">
-                    I'm obsessed with creating digital magic that's as addictive as your favorite TV show. Mobile apps, web design? Consider me your personal genie ✨
-                  </p>
-                </div>
-
-                {/* Categories */}
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-black/60">Web Design</span>
-                    <span className="text-black/40">(10)</span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-black/60">Webflow Development</span>
-                    <span className="text-black/40">(10)</span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-black/60">Mobile App Design</span>
-                    <span className="text-black/40">(4)</span>
-                  </div>
-                </div>
+          {/* Fixed Left Sidebar */}
+          <div className="fixed left-0 top-0 bottom-0 w-64 p-8 pt-24 flex flex-col justify-between border-r border-black/10 bg-white overflow-y-auto z-[150]">
+            <div className="space-y-6">
+              {/* Bio Text */}
+              <div>
+                <p className="text-sm leading-relaxed text-black/80">
+                  I'm obsessed with creating digital magic that's as addictive as your favorite TV show. Mobile apps, web design? Consider me your personal genie ✨
+                </p>
               </div>
 
-              {/* CTA at Bottom */}
-              <div className="pb-8">
-                <p className="text-xs text-black/60 mb-2">Ready to transform?</p>
-                <p className="text-xs text-black/60 mb-4">I offer free proposals and unlimited enthusiasm.</p>
-                <button className="px-6 py-2 bg-black text-white text-xs rounded-full hover:bg-black/80 transition">
-                  Let's talk!
-                </button>
+              {/* Categories */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-black/60">Web Design</span>
+                  <span className="text-black/40">(10)</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-black/60">Webflow Development</span>
+                  <span className="text-black/40">(10)</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-black/60">Mobile App Design</span>
+                  <span className="text-black/40">(4)</span>
+                </div>
               </div>
             </div>
 
-            {/* Right Content Area - Scrollable */}
-            <div 
-              className="flex-1 overflow-y-scroll overflow-x-hidden projects-scrollable-panel"
-              style={{
-                height: '100vh',
-                overflowY: 'scroll',
-                WebkitOverflowScrolling: 'touch',
-                position: 'relative'
-              }}
-            >
-              {/* Fixed Header - Aligned with top buttons at exact same level */}
-              <div className="px-8 pt-8 pb-4 bg-white">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h1 className="text-6xl md:text-8xl font-bold text-black leading-none mb-2">MY WORK</h1>
-                    <p className="text-lg text-black/60">Selected projects showcasing my skills and creativity</p>
-                  </div>
-                </div>
-              </div>
+            {/* CTA at Bottom */}
+            <div className="pb-8">
+              <p className="text-xs text-black/60 mb-2">Ready to transform?</p>
+              <p className="text-xs text-black/60 mb-4">I offer free proposals and unlimited enthusiasm.</p>
+              <button className="px-6 py-2 bg-black text-white text-xs rounded-full hover:bg-black/80 transition">
+                Let's talk!
+              </button>
+            </div>
+          </div>
 
-              {/* Scrollable Projects Grid */}
-              <div className="p-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 projects-grid-container pb-20">
+          {/* Scrollable Content */}
+          <div 
+            className="absolute inset-0 overflow-y-scroll"
+            style={{
+              paddingTop: '0',
+              paddingLeft: '280px',
+              paddingRight: '0'
+            }}
+          >
+            {/* Header */}
+            <div className="px-8 pt-8 pb-4 bg-white">
+              <h1 className="text-6xl md:text-8xl font-bold text-black leading-none mb-2">MY WORK</h1>
+              <p className="text-lg text-black/60">Selected projects showcasing my skills and creativity</p>
+            </div>
+
+            {/* Projects Grid */}
+            <div className="p-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-20">
                 {projects.map((project, index) => (
                   <motion.article
                     key={`${project.title}-${index}`}
@@ -1354,7 +1346,6 @@ export default function App() {
                 </div>
               </div>
             </div>
-          </div>
         </div>
       )}
     </main>
