@@ -779,33 +779,63 @@ html {
 }
 
 @media (max-width: 768px) {
+  /* Disable horizontal scrolling on mobile - make it vertical stack */
+  .horizontal-services-section {
+    overflow: visible !important;
+    padding-bottom: 4rem;
+    min-height: auto !important;
+  }
+
   .horizontal-services-wrapper {
     padding: 2rem 1rem;
+    min-height: auto;
+  }
+
+  .services-title-top {
+    padding-bottom: 2rem;
   }
 
   .services-title-top h2 {
     font-size: 3rem !important;
+    line-height: 1.1;
   }
 
   .services-cards-horizontal {
+    flex-direction: column;
     gap: 2rem;
+    width: 100%;
   }
 
   .service-card-horizontal {
-    width: 85vw;
-    min-height: 550px;
+    width: 100%;
+    max-width: 100%;
+    min-height: auto;
+    height: auto;
+    max-height: none;
   }
 
   .service-thumbnail {
-    height: 200px;
+    height: 180px;
   }
 
   .service-content-wrapper {
     padding: 1.5rem;
   }
 
+  .service-content-wrapper h3 {
+    font-size: 0.9rem !important;
+  }
+
+  .service-content-wrapper p {
+    font-size: 0.8rem !important;
+  }
+
   .service-name-highlight {
-    font-size: 1.5rem !important;
+    font-size: 1.25rem !important;
+  }
+
+  .view-all-card {
+    min-height: 250px;
   }
 
   .view-all-content h3 {
@@ -1238,8 +1268,32 @@ html {
 .projects-page-overlay {
   animation: projectsPageFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   -webkit-overflow-scrolling: touch;
+}
+
+/* Scrollable Projects Area */
+.scrollable-projects-area {
   overflow-y: auto !important;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain;
+  pointer-events: auto !important;
+  cursor: default;
+}
+
+.scrollable-projects-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-projects-area::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.scrollable-projects-area::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.scrollable-projects-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
 }
 
 @keyframes projectsPageFadeIn {
@@ -1275,7 +1329,7 @@ html {
 
 /* Footer Grid Text */
 .footer-text-grid {
-  font-size: clamp(8rem, 25vw, 20rem);
+  font-size: clamp(4rem, 25vw, 20rem);
   font-weight: 900;
   line-height: 0.9;
   color: transparent;
@@ -1289,6 +1343,19 @@ html {
   -webkit-background-clip: text;
   text-align: center;
   letter-spacing: -0.02em;
+  overflow: visible;
+  width: 100%;
+  display: block;
+  padding: 0;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .footer-text-grid {
+    font-size: clamp(3rem, 20vw, 8rem);
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+    text-stroke: 1px rgba(255, 255, 255, 0.1);
+  }
 }
 
 /* Topographic Background - TEST VERSION */
@@ -1353,5 +1420,108 @@ html {
   }
   50% {
     filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 50px rgba(192, 192, 192, 0.2));
+  }
+}
+
+/* Mobile Responsive Fixes */
+@media (max-width: 768px) {
+  /* Footer responsive */
+  footer {
+    padding: 2rem 1rem !important;
+  }
+
+  footer .w-full {
+    padding: 2rem 1rem !important;
+  }
+
+  footer .grid {
+    gap: 2rem !important;
+  }
+
+  /* Footer text container */
+  footer .relative.overflow-hidden {
+    padding: 1rem 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Header responsive */
+  header .max-w-7xl {
+    padding: 1rem 1.5rem !important;
+  }
+
+  /* Hero section responsive */
+  .hero-frame {
+    padding-bottom: 0 !important;
+    min-height: 100vh !important;
+  }
+
+  .hero-frame > div {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  /* Hero heading responsive */
+  .hero-frame h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .hero-frame .text-4xl {
+    font-size: 2rem !important;
+  }
+
+  /* About section responsive */
+  section .text-6xl,
+  section .text-7xl,
+  section .text-8xl {
+    font-size: 3rem !important;
+  }
+
+  /* Work section responsive */
+  .work-hero-text {
+    font-size: 4rem !important;
+  }
+
+  /* Service title responsive */
+  .services-title-top h2 {
+    font-size: 3rem !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden !important;
+  }
+
+  main {
+    overflow-x: hidden !important;
+  }
+
+  section {
+    overflow-x: hidden !important;
+  }
+}
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 576px) {
+  .footer-text-grid {
+    font-size: 2.5rem !important;
+    padding: 1rem 0 !important;
+  }
+
+  .hero-frame h1,
+  .hero-frame .text-4xl {
+    font-size: 1.75rem !important;
+  }
+
+  section .text-6xl,
+  section .text-7xl,
+  section .text-8xl {
+    font-size: 2.5rem !important;
+  }
+
+  .work-hero-text {
+    font-size: 3rem !important;
   }
 }

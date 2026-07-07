@@ -314,11 +314,12 @@ export default function App() {
       });
     }
 
-    // Horizontal scroll services section
+    // Horizontal scroll services section - only on desktop
     const servicesSection = document.querySelector('.horizontal-services-section');
     const servicesCards = document.querySelector('.services-cards-horizontal');
+    const isMobile = window.innerWidth <= 768;
 
-    if (servicesSection && servicesCards) {
+    if (servicesSection && servicesCards && !isMobile) {
       const scrollWidth = servicesCards.scrollWidth - window.innerWidth;
       
       // Main horizontal scroll animation
@@ -1242,21 +1243,27 @@ export default function App() {
             </div>
 
             {/* Right Content Area - Scrollable */}
-            <div className="flex-1 flex flex-col h-screen">
-              {/* Fixed Header */}
-              <div className="flex-shrink-0 p-8 pt-24 pb-8 bg-white border-b border-black/10">
-                <h1 className="text-6xl md:text-8xl font-bold text-black mb-4">MY WORK</h1>
-                <p className="text-lg text-black/60">Selected projects showcasing my skills and creativity</p>
+            <div className="flex-1 flex flex-col h-screen overflow-hidden">
+              {/* Fixed Header - Aligned with top buttons at exact same level */}
+              <div className="flex-shrink-0 px-8 pt-8 pb-4 bg-white">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h1 className="text-6xl md:text-8xl font-bold text-black leading-none mb-2">MY WORK</h1>
+                    <p className="text-lg text-black/60">Selected projects showcasing my skills and creativity</p>
+                  </div>
+                </div>
               </div>
 
               {/* Scrollable Projects Grid */}
               <div 
-                className="flex-1 overflow-y-auto overflow-x-hidden p-8" 
+                className="flex-1 p-8 scrollable-projects-area" 
                 style={{ 
+                  overflowY: 'auto',
+                  overflowX: 'hidden',
                   WebkitOverflowScrolling: 'touch',
-                  overscrollBehavior: 'contain'
+                  height: 'calc(100vh - 280px)',
+                  pointerEvents: 'auto'
                 }}
-                onWheel={(e) => e.stopPropagation()}
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 projects-grid-container pb-20">
                 {projects.map((project, index) => (
