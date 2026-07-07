@@ -512,11 +512,11 @@ export default function App() {
 
       <section
         id="top"
-        className="hero-frame relative flex w-full flex-col justify-between overflow-hidden bg-black pb-0"
-        style={{ minHeight: 'auto', height: 'auto' }}
+        className="hero-frame relative flex w-full flex-col justify-between overflow-visible bg-black pb-0"
+        style={{ minHeight: '100vh' }}
       >
         {/* Hero Content */}
-        <div className="relative z-10 flex-1 grid grid-cols-1 lg:grid-cols-[1fr,auto] gap-12 items-center px-8 md:px-12 pt-24 pb-8 min-h-[80vh]">
+        <div className="relative z-10 flex-1 grid grid-cols-1 lg:grid-cols-[1fr,auto] gap-12 items-center px-8 md:px-12 pt-24 pb-4">
           {/* Left Side - Text Content */}
           <motion.div
             initial="hidden"
@@ -585,18 +585,18 @@ export default function App() {
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
-          className="relative z-10 grid grid-cols-1 gap-px bg-white/10 md:grid-cols-3"
+          className="relative z-10 grid grid-cols-1 gap-px bg-white/10 md:grid-cols-3 mb-0"
         >
-          <motion.div variants={fadeIn} className="bg-black p-8 min-h-[140px] flex flex-col justify-center">
+          <motion.div variants={fadeIn} className="bg-black p-6 min-h-[120px] flex flex-col justify-center">
             <h3 className="mb-2 text-sm font-medium uppercase tracking-wider text-white">Full stack</h3>
-            <p className="text-sm text-white/50 leading-relaxed">Design code under one roof. No handoffs, no loose ends.</p>
+            <p className="text-xs leading-relaxed text-white/50">Design code under one roof. No handoffs, no loose ends.</p>
           </motion.div>
-          <motion.div variants={fadeIn} className="bg-black p-8 min-h-[140px] flex flex-col justify-center">
+          <motion.div variants={fadeIn} className="bg-black p-6 min-h-[120px] flex flex-col justify-center">
             <h3 className="mb-2 text-sm font-medium uppercase tracking-wider text-white">Built to scale</h3>
-            <p className="text-sm text-white/50 leading-relaxed">Interfaces that reduce decision fatigue and increase adoption.</p>
+            <p className="text-xs leading-relaxed text-white/50">Interfaces that reduce decision fatigue and increase adoption.</p>
           </motion.div>
-          <motion.div variants={fadeIn} className="bg-black p-8 min-h-[140px] flex items-center justify-center">
-            <a href="#contact" className="w-full border border-white bg-white px-8 py-4 text-center text-sm font-medium uppercase tracking-wider text-black transition hover:bg-white/90">
+          <motion.div variants={fadeIn} className="bg-black p-6 min-h-[120px] flex items-center justify-center">
+            <a href="#contact" className="w-full border border-white bg-white px-6 py-3 text-center text-xs font-medium uppercase tracking-wider text-black transition hover:bg-white/90">
               Start a Project
             </a>
           </motion.div>
