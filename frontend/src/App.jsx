@@ -1250,7 +1250,14 @@ export default function App() {
               </div>
 
               {/* Scrollable Projects Grid */}
-              <div className="flex-1 overflow-y-auto p-8" style={{ WebkitOverflowScrolling: 'touch' }}>
+              <div 
+                className="flex-1 overflow-y-auto overflow-x-hidden p-8" 
+                style={{ 
+                  WebkitOverflowScrolling: 'touch',
+                  overscrollBehavior: 'contain'
+                }}
+                onWheel={(e) => e.stopPropagation()}
+              >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 projects-grid-container pb-20">
                 {projects.map((project, index) => (
                   <motion.article
