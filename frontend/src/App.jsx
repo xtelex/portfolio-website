@@ -840,7 +840,7 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="relative border-t border-white/10 bg-black">
+      <footer id="contact" className="relative border-t border-white/10 bg-black">
         <div className="w-full px-6 py-12">
           {/* Footer Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 max-w-7xl mx-auto">
