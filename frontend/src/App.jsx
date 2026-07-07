@@ -189,12 +189,12 @@ const projects = [
     thumbnail: "/assets/images/CHATAPP.png"
   },
   {
-    title: "Project",
-    description: "Add a short project description here.",
-    tags: ["Landing Page", "Responsive"],
-    liveHref: "#",
+    title: "SHOES KOPO - E-Commerce Platform",
+    description: "Modern e-commerce website for sneakers and shoes with product catalog and shopping features.",
+    tags: ["React", "E-Commerce", "Responsive", "UI/UX"],
+    liveHref: "https://coffee-shop-website-client-pe39bnty8-xtelexs-projects.vercel.app/",
     codeHref: "#",
-    thumbnail: null
+    thumbnail: "/assets/images/uithumb.png"
   }
 ];
 
