@@ -501,8 +501,14 @@ export default function App() {
       lenisRef.current.stop();
     }
     
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+    
     return () => {
       document.removeEventListener("keydown", onKey);
+      // Allow body scroll again
+      document.body.style.overflow = '';
+      
       // Restart Lenis when projects page closes
       if (lenisRef.current) {
         lenisRef.current.start();
@@ -1254,7 +1260,7 @@ export default function App() {
               }}
             >
               {/* Fixed Header - Aligned with top buttons at exact same level */}
-              <div className="sticky top-0 z-10 px-8 pt-8 pb-4 bg-white">
+              <div className="px-8 pt-8 pb-4 bg-white">
                 <div className="flex items-start justify-between">
                   <div>
                     <h1 className="text-6xl md:text-8xl font-bold text-black leading-none mb-2">MY WORK</h1>
@@ -1272,7 +1278,7 @@ export default function App() {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="group bg-black/5 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 project-card hover:scale-105 hover:z-10 relative"
+                    className="group bg-black/5 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500 project-card relative"
                   >
                     {/* Project Image */}
                     <div className="aspect-video bg-gradient-to-br from-black/10 to-black/5 relative overflow-hidden">
